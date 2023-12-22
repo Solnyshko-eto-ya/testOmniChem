@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header";
 import Magnifier from "../components/Magnifier";
 import { InputStyle } from "../type";
@@ -6,7 +5,6 @@ import {
   Categories,
   InputIcon,
   InputWrapper,
-  PageWrapper,
   SearchContainer,
   VerticalDivider,
 } from "./MainPage";
