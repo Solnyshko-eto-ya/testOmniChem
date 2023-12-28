@@ -30,9 +30,9 @@ const groupsFilters = [
     label: "Group 1",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 1" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 2" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 3" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 1" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 2" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 3" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -41,11 +41,11 @@ const groupsFilters = [
     label: "Group 2",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 4" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 5" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 6" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 7" styleType={ButtonStyle.FILTER} />
-        <Button text="Subgroup 8" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 4" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 5" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 6" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 7" styleType={ButtonStyle.GRAY} />
+        <Button text="Subgroup 8" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -54,7 +54,7 @@ const groupsFilters = [
     label: "Group 3",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -63,7 +63,7 @@ const groupsFilters = [
     label: "Group 4",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -72,7 +72,7 @@ const groupsFilters = [
     label: "Group 5",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -81,7 +81,7 @@ const groupsFilters = [
     label: "Group 6",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -90,7 +90,7 @@ const groupsFilters = [
     label: "Group 7",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -99,7 +99,7 @@ const groupsFilters = [
     label: "Group 8",
     children: (
       <GroupOfFilters>
-        <Button text="Subgroup 9" styleType={ButtonStyle.FILTER} />
+        <Button text="Subgroup 9" styleType={ButtonStyle.GRAY} />
       </GroupOfFilters>
     ),
   },
@@ -108,7 +108,7 @@ const groupsFilters = [
 const quickFilters = [
   {
     key: "1",
-    label: <Button text="Filter 1" styleType={ButtonStyle.FILTER} />,
+    label: <Button text="Filter 1" styleType={ButtonStyle.GRAY} />,
   },
   {
     key: "2",
@@ -223,7 +223,7 @@ const MainPage = () => {
             filterText="Ready to Use Product Type"
           />
           <Button
-            styleType={ButtonStyle.MORE_FILTERS}
+            styleType={ButtonStyle.BLUE}
             text="All filters"
             onClick={showDrawer}
           />

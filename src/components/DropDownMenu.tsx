@@ -12,7 +12,7 @@ interface DropDownMenuProps {
 const DropDownMenu: React.FC<DropDownMenuProps> = ({ filterText, items }) => (
   <Dropdown menu={{ items }} placement="bottom" arrow>
     <Space>
-      <Button text={filterText} styleType={ButtonStyle.FILTER} />
+      <Button text={filterText} styleType={ButtonStyle.GRAY} />
     </Space>
   </Dropdown>
 );

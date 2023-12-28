@@ -5,9 +5,15 @@ export enum CardStyle {
 
 export enum ButtonStyle {
   ROUND,
-  MORE_FILTERS,
-  FILTER,
+  GRAY,
+  BLUE,
 }
+
+// export interface CollapseItems {
+//   key: string;
+//   label: string;
+//   children: React.ReactNode;
+// }
 
 export enum InputStyle {
   DEFAULT,

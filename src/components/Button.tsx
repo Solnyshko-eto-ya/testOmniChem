@@ -45,10 +45,10 @@ const StyledButton = styled.button<{
             transition: 500ms;
           }
         `;
-      case ButtonStyle.FILTER:
+      case ButtonStyle.GRAY:
         return css`
           height: 40px;
-          width: auto;
+          width: 100%;
 
           outline: 1px solid #6386a5;
           border-radius: 5px;
@@ -70,10 +70,11 @@ const StyledButton = styled.button<{
             color: #ffffff;
           }
         `;
-      case ButtonStyle.MORE_FILTERS:
+
+      case ButtonStyle.BLUE:
         return css`
           height: 40px;
-          width: auto;
+          width: 100%;
 
           border-radius: 5px;
           color: #ffffff;

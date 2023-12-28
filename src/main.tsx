@@ -1,13 +1,13 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MaterialPage from "./pages/MaterialPage.tsx";
-
+import MainPage from "./pages/MainPage.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainPage />,
   },
   {
     path: "/material",
