@@ -68,7 +68,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
         <MaterialDescription>{description}</MaterialDescription>
       </CardInfo>
       <CardFooter>
-        <Button text={text} onClick={onClick} styleType={ButtonStyle.FILTER} />
+        <Button text={text} onClick={onClick} styleType={ButtonStyle.GRAY} />
         <Link href={link}>View Product</Link>
       </CardFooter>
     </StyledCard>
