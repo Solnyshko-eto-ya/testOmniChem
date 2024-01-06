@@ -157,6 +157,9 @@ const MainPage = () => {
     setOpen(false);
   };
 
+  // useEffect(() => {});
+  // Решит ли проблему заедания кнопки развертывания карточки сырья?
+
   return (
     <>
       <CustomDrawer
@@ -200,22 +203,21 @@ const MainPage = () => {
       </Header>
       <PageWrapper>
         <FiltersContainer>
-          <FiltersWrapper>
-            <DropDownMenu items={quickFilters} filterText="Features" />
-            <DropDownMenu items={quickFilters} filterText="Suppliers" />
-            <DropDownMenu items={quickFilters} filterText="End Uses" />
-            <DropDownMenu items={quickFilters} filterText="Chemical Family" />
-            <DropDownMenu
-              items={quickFilters}
-              filterText="Compatible Substrates & Surfaces"
-            />
+          <DropDownMenu items={quickFilters} filterText="Features" />
+          <DropDownMenu items={quickFilters} filterText="Suppliers" />
+          <DropDownMenu items={quickFilters} filterText="End Uses" />
+          <DropDownMenu items={quickFilters} filterText="Chemical Family" />
+          <DropDownMenu
+            items={quickFilters}
+            filterText="Compatible Substrates & Surfaces"
+          />
 
-            <DropDownMenu
-              items={quickFilters}
-              filterText="Ready to Use Product Type"
-            />
-          </FiltersWrapper>
-          <div style={{ flexGrow: "1" }}>
+          <DropDownMenu
+            items={quickFilters}
+            filterText="Ready to Use Product Type"
+          />
+
+          <div>
             <Button
               styleType={ButtonStyle.BLUE}
               text="All filters"
@@ -227,7 +229,7 @@ const MainPage = () => {
           {materials?.map((material: Material) => (
             <MaterialCard
               link={"/material"}
-              text={isOpen ? "More" : "Less"}
+              text={isOpen ? "Less" : "More"}
               key={material.id}
               manufacturerName={material.materialName}
               materialName={material.materialName}
@@ -251,23 +253,31 @@ const MainPage = () => {
 export default MainPage;
 
 export const PageWrapper = styled.div`
-  padding: 10px 120px 10px 120px;
-`;
-
-const FiltersWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 15px;
-  flex-grow: 3;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 const MaterialsList = styled.div`
   max-width: 1440px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+
   display: grid;
   /* grid-auto-rows: minmax(min-content, max-content); */
-  gap: 20px;
+  grid-gap: 1rem;
   margin: 0 auto;
+
+  @media (min-width: 620px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 930px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 1240px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (min-width: 1550px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const SearchContainer = styled.div`
@@ -324,7 +334,7 @@ export const InputWrapper = styled.div`
 `;
 
 const FiltersContainer = styled.div`
-  width: 100%;
+  max-width: 1440px;
   height: 60px;
 
   display: flex;
@@ -332,7 +342,7 @@ const FiltersContainer = styled.div`
   align-items: center;
   gap: 20px;
 
-  margin: 0 0 20px 0;
+  margin: 0 auto;
 `;
 
 const DrawerContainer = styled.div`
