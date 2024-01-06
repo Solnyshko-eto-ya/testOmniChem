@@ -200,24 +200,28 @@ const MainPage = () => {
       </Header>
       <PageWrapper>
         <FiltersContainer>
-          <DropDownMenu items={quickFilters} filterText="Features" />
-          <DropDownMenu items={quickFilters} filterText="Suppliers" />
-          <DropDownMenu items={quickFilters} filterText="End Uses" />
-          <DropDownMenu items={quickFilters} filterText="Chemical Family" />
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Compatible Substrates & Surfaces"
-          />
+          <FiltersWrapper>
+            <DropDownMenu items={quickFilters} filterText="Features" />
+            <DropDownMenu items={quickFilters} filterText="Suppliers" />
+            <DropDownMenu items={quickFilters} filterText="End Uses" />
+            <DropDownMenu items={quickFilters} filterText="Chemical Family" />
+            <DropDownMenu
+              items={quickFilters}
+              filterText="Compatible Substrates & Surfaces"
+            />
 
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Ready to Use Product Type"
-          />
-          <Button
-            styleType={ButtonStyle.BLUE}
-            text="All filters"
-            onClick={showDrawer}
-          />
+            <DropDownMenu
+              items={quickFilters}
+              filterText="Ready to Use Product Type"
+            />
+          </FiltersWrapper>
+          <div style={{ flexGrow: "1" }}>
+            <Button
+              styleType={ButtonStyle.BLUE}
+              text="All filters"
+              onClick={showDrawer}
+            />
+          </div>
         </FiltersContainer>
         <MaterialsList>
           {materials?.map((material: Material) => (
@@ -248,6 +252,13 @@ export default MainPage;
 
 export const PageWrapper = styled.div`
   padding: 10px 120px 10px 120px;
+`;
+
+const FiltersWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex-grow: 3;
 `;
 
 const MaterialsList = styled.div`

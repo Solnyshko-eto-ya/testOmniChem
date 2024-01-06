@@ -19,7 +19,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ filterText, items }) => (
 );
 
 const StyledDropDown = styled(Dropdown)`
-  width: 100%;
+  width: auto;
 `;
 
 export default DropDownMenu;

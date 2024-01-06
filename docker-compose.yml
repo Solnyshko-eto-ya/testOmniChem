@@ -12,7 +12,3 @@ services:
        source: ./
        target: /srv/app
    tty: true
-
-- name: Azure Login
-uses: Azure/login@v1.5.1
-            

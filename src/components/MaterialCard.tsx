@@ -154,6 +154,7 @@ const MaterialName = styled.p`
 const CardFooter = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 20px;
   justify-content: space-between;
   align-items: center;
 
