@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Magnifier from "../components/Magnifier";
-import { InputStyle } from "../type";
+import { ButtonStyle, InputStyle } from "../type";
 import {
   Categories,
   InputIcon,
@@ -8,14 +8,93 @@ import {
   SearchContainer,
   VerticalDivider,
 } from "./MainPage";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import styled from "styled-components";
 import SupplierCard from "../components/SupplierCard";
 import { data } from "../const/data";
+import CustomDrawer from "../components/CustomDrawer";
+import { useState } from "react";
+
+import SamplesForm from "./DrawerPages/SamplesForm";
+import Button from "../components/Button";
+import QuoteForm from "./DrawerPages/QuoteForm";
 
 const MaterialPage = () => {
+  const [searchState, setSearchState] = useState("");
+
+  const [openQuoteRequest, setOpenQuoteRequest] = useState(false);
+  const [openSampleRequest, setOpenSampleRequest] = useState(false);
+  const showQuoteRequest = () => {
+    setOpenQuoteRequest(true);
+  };
+
+  const showSampleRequest = () => {
+    setOpenSampleRequest(true);
+  };
+
+  const onCloseQuoteRequest = () => {
+    setOpenQuoteRequest(false);
+  };
+
+  const onCloseSampleRequest = () => {
+    setOpenSampleRequest(false);
+  };
+
+  const [samplesFormStage, setSamplesFormStage] = useState(1);
+
+  const submitSamples = () => {
+    setSamplesFormStage(2);
+  };
+
+  const [quoteFormStage, setQuoteFormStage] = useState(1);
+
+  const submitQuote = () => {
+    setQuoteFormStage(2);
+  };
+
   return (
     <>
+      <CustomDrawer
+        open={openQuoteRequest}
+        onClose={onCloseQuoteRequest}
+        size="default"
+        placement="right"
+        title="QuoteRequest"
+      >
+        {quoteFormStage == 1 ? (
+          <QuoteForm onSubmit={submitQuote} />
+        ) : (
+          <div>
+            <p>Your request has been sent to the supplier</p>
+            <Button
+              onClick={() => location.reload()}
+              styleType={ButtonStyle.BLUE}
+              text="Continue"
+            />
+          </div>
+        )}
+      </CustomDrawer>
+      <CustomDrawer
+        open={openSampleRequest}
+        onClose={onCloseSampleRequest}
+        size="default"
+        placement="right"
+        title="SampleRequest"
+      >
+        {samplesFormStage == 1 ? (
+          <SamplesForm onSubmit={submitSamples} />
+        ) : (
+          <div>
+            <p>Your request has been sent to the supplier</p>
+            <Button
+              onClick={() => location.reload()}
+              styleType={ButtonStyle.BLUE}
+              text="Continue"
+            />
+          </div>
+        )}
+      </CustomDrawer>
+
       <Header>
         <p>OmniChem</p>
         <SearchContainer>
@@ -24,8 +103,9 @@ const MaterialPage = () => {
           <InputWrapper>
             <Input
               styleType={InputStyle.DEFAULT}
-              placeholder=""
-              onChange={() => {}}
+              placeholder="Enter what you want to find"
+              onChange={setSearchState}
+              value={searchState}
             />
           </InputWrapper>
 
@@ -61,12 +141,19 @@ const MaterialPage = () => {
                     <p>Seller city: {supplier.city}</p>
                     <p>Legal entity: {supplier.legalEntity}</p>
                     <p>Main advantages: {supplier.mainAdvantages}</p>
-                    <p>Brief description: {supplier.briefDescription}</p>
+                    <p>Brief description:{supplier.briefDescription}</p>
                   </div>
                 ),
               },
             ];
-            return <SupplierCard items={items} />;
+            return (
+              <SupplierCard
+                key={data.id}
+                items={items}
+                sampleRequest={showSampleRequest}
+                quoteRequest={showQuoteRequest}
+              />
+            );
           })}
         </ScrollableList>
       </MaterialPageWrapper>
@@ -97,16 +184,42 @@ const MaterialPage = () => {
         <Line />
         <h2>Applications & Uses</h2>
         {data.ApplicationsAndUses.map(({ key, value }) => (
-          <FeatureLine key={key}>
-            <FeatureName>{key}: </FeatureName>
-            {value}
-          </FeatureLine>
+          <>
+            {typeof value === "string" ? (
+              <FeatureLine key={key}>
+                <FeatureName>{key}: </FeatureName>
+                {value}
+              </FeatureLine>
+            ) : (
+              <ExtendedBlock>
+                <FeatureName>{key}: </FeatureName>
+                <FeatureLine key={key}>
+                  {value.map(({ key, value }) => (
+                    <Wrapper>
+                      <FeatureName>{key}</FeatureName>
+                      <p>{value}</p>
+                    </Wrapper>
+                  ))}
+                </FeatureLine>
+              </ExtendedBlock>
+            )}
+          </>
         ))}
         <Line />
       </FullSpecsWrapper>
     </>
   );
 };
+
+const ExtendedBlock = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const MaterialPageWrapper = styled.div`
   display: flex;
@@ -129,7 +242,7 @@ const MolecularStructureBlock = styled.div`
 const FullSpecsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   padding: 30px 120px 10px 120px;
 
   height: auto;
@@ -165,6 +278,7 @@ const FeatureLine = styled.p`
 
 const FeatureName = styled.span`
   font-weight: 700;
+  color: #505050;
 `;
 
 const ScrollableList = styled.div`
@@ -175,8 +289,6 @@ const ScrollableList = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
-
-  scroll-behavior: smooth;
 
   overflow-x: scroll;
 

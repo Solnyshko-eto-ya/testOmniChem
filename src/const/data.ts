@@ -1,5 +1,6 @@
 export const data = {
   name: "Dytek A",
+  id: 123412,
   molucalarPicture: {
     key: "Molecular Structure",
     value: "https://ibb.co/Mg9SMBj",
@@ -130,23 +131,23 @@ export const data = {
       value:
         "Adhesives & Sealants, Automotive & Transportation, Building & Construction, Electrical & Electronics, Industrial, Paints & Coatings",
     },
-    // {
-    //   key: "Applications",
-    //   value: [
-    //     {
-    //       key: "Paints & Coatings — Automotive & Transportation",
-    //       value: "Marine Coatings",
-    //     },
-    //     {
-    //       key: "Adhesives & Sealants — Building & Construction",
-    //       value: "Construction Adhesives",
-    //     },
-    //     {
-    //       key: "Paints & Coatings — Building & Construction",
-    //       value: "Marine Coatings",
-    //     },
-    //   ],
-    // },
+    {
+      key: "Applications",
+      value: [
+        {
+          key: "Paints & Coatings — Automotive & Transportation",
+          value: "Marine Coatings",
+        },
+        {
+          key: "Adhesives & Sealants — Building & Construction",
+          value: "Construction Adhesives",
+        },
+        {
+          key: "Paints & Coatings — Building & Construction",
+          value: "Marine Coatings",
+        },
+      ],
+    },
     {
       key: "Compatible Polymers & Resins",
       value: "Epoxies (EP)",

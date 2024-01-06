@@ -15,8 +15,14 @@ export enum ButtonStyle {
 //   children: React.ReactNode;
 // }
 
+export interface Applications {
+  key: string;
+  value: string;
+}
+
 export enum InputStyle {
   DEFAULT,
+  BORDERED,
 }
 
 export interface Material {

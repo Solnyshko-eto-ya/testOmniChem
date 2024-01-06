@@ -7,11 +7,19 @@ import { CollapseProps } from "antd";
 
 interface MaterialCardProps {
   items: CollapseProps["items"];
+  sampleRequest: () => void;
+  quoteRequest: () => void;
+  key: number;
 }
 
-const SupplierCard: React.FC<MaterialCardProps> = ({ items }) => {
+const SupplierCard: React.FC<MaterialCardProps> = ({
+  items,
+  sampleRequest,
+  quoteRequest,
+  key,
+}) => {
   return (
-    <StyledCard>
+    <StyledCard key={key}>
       <CardHeader>Create an Order</CardHeader>
       <CollapseBlock items={items} />
       <div>
@@ -21,8 +29,16 @@ const SupplierCard: React.FC<MaterialCardProps> = ({ items }) => {
         </p>
       </div>
 
-      <Button styleType={ButtonStyle.GRAY} text="Request a Sample" />
-      <Button styleType={ButtonStyle.BLUE} text="Request a Sample" />
+      <Button
+        styleType={ButtonStyle.GRAY}
+        text="Request a quote"
+        onClick={quoteRequest}
+      />
+      <Button
+        styleType={ButtonStyle.BLUE}
+        text="Request a Sample"
+        onClick={sampleRequest}
+      />
     </StyledCard>
   );
 };

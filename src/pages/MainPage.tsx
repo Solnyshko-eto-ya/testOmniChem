@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import MaterialCard from "../components/MaterialCard";
 import { useEffect, useState } from "react";
 import { ButtonStyle, CardStyle, InputStyle, Material } from "../type";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import axios from "axios";
 import Magnifier from "../components/Magnifier";
 import DropDownMenu from "../components/DropDownMenu";
@@ -108,31 +108,15 @@ const groupsFilters = [
 const quickFilters = [
   {
     key: "1",
-    label: <Button text="Filter 1" styleType={ButtonStyle.GRAY} />,
+    label: <p>Filter 1</p>,
   },
   {
     key: "2",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
-        2nd menu item
-      </a>
-    ),
+    label: <p>Filter 2</p>,
   },
   {
     key: "3",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        3rd menu item
-      </a>
-    ),
+    label: <p>Filter 3</p>,
   },
 ];
 
@@ -175,7 +159,13 @@ const MainPage = () => {
 
   return (
     <>
-      <CustomDrawer open={open} onClose={onClose} size="large">
+      <CustomDrawer
+        open={open}
+        onClose={onClose}
+        size="large"
+        placement="left"
+        title="All filters"
+      >
         <DrawerContainer>
           <FilterGroups>
             <CollapseBlock items={groupsFilters} />
@@ -199,6 +189,7 @@ const MainPage = () => {
               styleType={InputStyle.DEFAULT}
               placeholder=""
               onChange={() => {}}
+              value={""}
             />
           </InputWrapper>
 

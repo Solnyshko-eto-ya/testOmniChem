@@ -1,14 +1,16 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
-import { InputStyle } from "../type";
+import { InputStyle } from "../../type";
 
 interface InputProps {
-  styleType: InputStyle;
+  styleType?: InputStyle;
   placeholder: string;
   onChange: (value: string) => void;
   value: string;
   children?: React.ReactNode;
+  disabled?: boolean;
+  maxLength?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -17,6 +19,8 @@ const Input: React.FC<InputProps> = ({
   onChange,
   value,
   children,
+  disabled,
+  maxLength,
 }) => {
   return (
     <StyledInput
@@ -24,6 +28,8 @@ const Input: React.FC<InputProps> = ({
       $styleType={styleType}
       onChange={(e) => onChange(e.target.value)}
       value={value}
+      disabled={disabled}
+      maxLength={maxLength}
     >
       {children}
     </StyledInput>
@@ -62,12 +68,11 @@ const StyledInput = styled.input<{
           border-radius: 5px;
           outline: 1px solid #383a3b;
           box-sizing: border-box;
-          font-size: 24px;
-          line-height: 30px;
+          font-size: 19px;
+          line-height: 24px;
           height: 40px;
           width: 100%;
-          padding: 0 20px 0 20px;
-
+          padding: 0 13px 0 13px;
           &:hover {
           }
           &:focus {

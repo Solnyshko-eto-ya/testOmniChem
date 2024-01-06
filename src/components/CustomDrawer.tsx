@@ -1,11 +1,14 @@
 import React from "react";
 import { Drawer } from "antd";
+import styled from "styled-components";
 
 interface DivederProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
   size: "default" | "large";
+  placement: "top" | "right" | "bottom" | "left";
+  title: string;
 }
 
 const CustomDrawer: React.FC<DivederProps> = ({
@@ -13,18 +16,22 @@ const CustomDrawer: React.FC<DivederProps> = ({
   onClose,
   children,
   size,
+  placement,
+  title,
 }) => {
   return (
-    <Drawer
-      title="All filters"
-      placement="left"
+    <StyledDrawer
+      title={title}
+      placement={placement}
       size={size}
       onClose={onClose}
       open={open}
     >
       {children}
-    </Drawer>
+    </StyledDrawer>
   );
 };
+
+const StyledDrawer = styled(Drawer)``;
 
 export default CustomDrawer;
