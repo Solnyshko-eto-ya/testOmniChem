@@ -11,6 +11,7 @@ import Button from "../components/Button";
 import CustomDrawer from "../components/CustomDrawer";
 import CollapseBlock from "../components/CollapseBlock";
 import CustomCheckBox from "../components/CustomCheckBox";
+import { useNavigate } from "react-router";
 
 const filters = [
   { name: "filter 1" },
@@ -160,6 +161,8 @@ const MainPage = () => {
   // useEffect(() => {});
   // Решит ли проблему заедания кнопки развертывания карточки сырья?
 
+  const navigate = useNavigate();
+
   return (
     <>
       <CustomDrawer
@@ -185,8 +188,6 @@ const MainPage = () => {
       </CustomDrawer>
       <Header>
         <SearchContainer>
-          <Categories />
-          <VerticalDivider />
           <InputWrapper>
             <Input
               styleType={InputStyle.DEFAULT}
@@ -216,20 +217,13 @@ const MainPage = () => {
             items={quickFilters}
             filterText="Ready to Use Product Type"
           />
-
-          <div>
-            <Button
-              styleType={ButtonStyle.BLUE}
-              text="All filters"
-              onClick={showDrawer}
-            />
-          </div>
         </FiltersContainer>
         <MaterialsList>
           {materials?.map((material: Material) => (
             <MaterialCard
+              onCardClick={() => navigate("/material")}
               link={"/material"}
-              text={isOpen ? "Less" : "More"}
+              text={isOpen ? "More" : "Less"}
               key={material.id}
               manufacturerName={material.materialName}
               materialName={material.materialName}
