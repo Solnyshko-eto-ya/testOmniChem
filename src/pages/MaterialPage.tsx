@@ -32,14 +32,6 @@ const MaterialPage = () => {
     setOpenSampleRequest(false);
   };
 
-  const [samplesFormStage, setSamplesFormStage] = useState(1);
-
-  const submitSamples = () => {
-    setSamplesFormStage(2);
-  };
-
-  submitSamples();
-
   const [quoteFormStage, setQuoteFormStage] = useState(1);
 
   const submitQuote = () => {
@@ -75,18 +67,7 @@ const MaterialPage = () => {
         placement="right"
         title="SampleRequest"
       >
-        {samplesFormStage == 1 ? (
-          <SamplesForm />
-        ) : (
-          <div>
-            <p>Your request has been sent to the supplier</p>
-            <Button
-              type="default"
-              onClick={() => location.reload()}
-              text="Continue"
-            />
-          </div>
-        )}
+        <SamplesForm />
       </CustomDrawer>
 
       <Header>
