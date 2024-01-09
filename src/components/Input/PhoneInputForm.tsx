@@ -30,6 +30,7 @@ const PhoneInputForm: React.FC<PhoneInputFormProps> = ({ value, onChange }) => {
         guide={true}
         render={() => (
           <Input
+            name=""
             placeholder="+7 (999) 999 99 99"
             onChange={onChange}
             value={value}
