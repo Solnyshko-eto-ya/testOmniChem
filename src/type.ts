@@ -26,13 +26,26 @@ export enum InputStyle {
   BORDERED,
 }
 
+interface AttributeValue {
+  translated_value: null;
+  value: string;
+}
+
+interface Attribute {
+  attribute_name: string;
+  translated_attribute_name: null;
+  values: AttributeValue[];
+}
+
 export interface Material {
-  id: string;
-  manufactureName: string;
-  materialName: string;
-  readyToUseProductType: string;
-  compatibleSubstratesAndSurfaces: string;
-  features: string;
-  chemicalFamily: string;
-  description: string;
+  value: string;
+  is_supplier_available: boolean;
+  attributes: Attribute[];
+}
+
+export interface MaterialResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Material[];
 }

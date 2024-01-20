@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CustomButton from "../CustomButton";
 import { CardStyle } from "../../type";
-import CardInfo from "../CardInfo";
+import CardInfo from "./CardInfo";
 import fireIcon from "./fire2.png";
 import { Popover } from "antd";
 
@@ -16,7 +16,7 @@ interface MaterialCardProps {
   chemicalFamily: string;
   description: string;
   materialName: string;
-
+  isHaveSupplier: boolean;
   link: string;
   onCardClick: () => void;
 }
@@ -31,7 +31,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
   features,
   chemicalFamily,
   description,
-
+  isHaveSupplier,
   link,
 
   onCardClick,
@@ -84,11 +84,15 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
       <CardFooter>
         <LinkContainer>
           <Link href={link}>Посмотреть сырье </Link>
-          <FireIcon>
-            <Popover content="У этого сырья есть поставщик!">
-              <img src={fireIcon} alt="" />
-            </Popover>
-          </FireIcon>
+          {isHaveSupplier ? (
+            <FireIcon>
+              <Popover content="У этого сырья есть поставщик!">
+                <img src={fireIcon} alt="" />
+              </Popover>
+            </FireIcon>
+          ) : (
+            <FireIcon></FireIcon>
+          )}
         </LinkContainer>
 
         {isOpen ? (

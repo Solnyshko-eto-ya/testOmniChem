@@ -2,17 +2,18 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import MaterialCard from "../components/MaterialCard/MaterialCard";
 import { useEffect, useState } from "react";
-import { Material } from "../type";
+import { Material, MaterialResponse } from "../type";
 import CustomInput from "../components/Input/CustomInput";
 import axios from "axios";
 
 import DropDownMenu from "../components/DropDownMenu";
 
-import { useNavigate } from "react-router";
 import { MessageOutlined, SearchOutlined } from "@ant-design/icons";
-
-import { Popover } from "antd";
+import json from "../data.json";
+import { PaginationProps, Popover } from "antd";
 import CustomButton from "../components/CustomButton";
+import { useNavigate } from "react-router";
+import CustomPagination from "../components/CustomPagination";
 
 const quickFilters = [
   {
@@ -30,17 +31,24 @@ const quickFilters = [
 ];
 
 const MainPage = () => {
-  const [materials, setMaterials] = useState<Material[]>();
+  const [materials, setMaterials] = useState<Material[]>(json.results);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get<Material[]>(
-        `https://my-json-server.typicode.com/Solnyshko-eto-ya/jsonServer/data`
-      );
-      setMaterials(response.data);
-    };
-
-    fetchData();
+    // axios({
+    //   method: "get",
+    //   url: "http://212.233.79.177:8000/API/v1/wiki/materials/",
+    //   responseType: "stream",
+    // }).then(function (response) {
+    //   setMaterials(response.data);
+    // });
+    // const fetchData = async () => {
+    //   const response = await axios.get<MaterialResponse>(
+    //     // `http://212.233.79.177:8000/wiki/API/v1/materials/`
+    //     `http://212.233.79.177:8000/API/v1/wiki/materials/`
+    //   );
+    //   setMaterials(response.data.results);
+    // };
+    // fetchData();
   }, []);
 
   // useEffect(() => {});
@@ -69,10 +77,19 @@ const MainPage = () => {
           onChange={setChatMessage}
           value={chatMessage}
         />
+
         <CustomButton text="Отправить" type="primary" />
       </ChatBotFooter>
     </ChatBotWindow>
   );
+
+  const [total, setTotal] = useState(50);
+  const [current, setCurrent] = useState(1);
+
+  const onChange: PaginationProps["onChange"] = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
 
   return (
     <>
@@ -93,16 +110,14 @@ const MainPage = () => {
       </FloatButtonContainer>
 
       <Header>
-        <HeaderContainer>
-          <h1>OmniChem</h1>
-          <CustomInput
-            name=""
-            placeholder="Input what you want to find"
-            onChange={() => {}}
-            value={""}
-            addonBefore={<SearchOutlined />}
-          />
-        </HeaderContainer>
+        <h1>OmniChem</h1>
+        <CustomInput
+          name=""
+          placeholder="Введите то, что вы хотите найти"
+          onChange={() => {}}
+          value={""}
+          addonBefore={<SearchOutlined />}
+        />
       </Header>
       <PageWrapper>
         <FiltersContainer>
@@ -132,25 +147,39 @@ const MainPage = () => {
             filterText="Готовый к использованию тип продукта"
           />
         </FiltersContainer>
-
+        <PaginationContainer style={{ marginBottom: "0" }}>
+          <CustomPagination
+            onChange={onChange}
+            total={total}
+            current={current}
+          />
+        </PaginationContainer>
         <MaterialsList>
-          {materials?.map((material: Material) => (
+          {materials.map((material: Material) => (
             <MaterialCard
+              isHaveSupplier={material.is_supplier_available}
               onCardClick={() => navigate("/material")}
               link={"/material"}
-              key={material.id}
-              manufacturerName={material.materialName}
-              materialName={material.materialName}
-              readyToUseProductType={material.readyToUseProductType}
-              chemicalFamily={material.chemicalFamily}
+              key={material.value}
+              manufacturerName={material.attributes[1].values[0].value}
+              materialName={material.value}
+              description={material.attributes[0].values[0].value}
+              readyToUseProductType={material.attributes[8].values[0].value}
+              chemicalFamily={material.attributes[3].values[0].value}
               compatibleSubstratesAndSurfaces={
-                material.compatibleSubstratesAndSurfaces
+                material.attributes[4].values[0].value
               }
-              features={material.features}
-              description={material.description}
+              features={material.attributes[6].values[0].value}
             />
           ))}
         </MaterialsList>
+        <PaginationContainer>
+          <CustomPagination
+            onChange={onChange}
+            total={total}
+            current={current}
+          />
+        </PaginationContainer>
       </PageWrapper>
     </>
   );
@@ -158,29 +187,9 @@ const MainPage = () => {
 
 export default MainPage;
 
-const HeaderContainer = styled.div`
+const PaginationContainer = styled.div`
   margin: 0 auto;
-  max-width: 1440px;
-
-  @media (min-width: 320px) {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-
-    align-items: center;
-
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 992px) {
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-    padding: 20px 0 20px 0;
-
-    box-sizing: border-box;
-  }
+  margin-bottom: 60px;
 `;
 
 const ChatBotWindow = styled.div`
