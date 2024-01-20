@@ -6,8 +6,6 @@ import { Material, MaterialResponse } from "../type";
 import CustomInput from "../components/Input/CustomInput";
 import axios from "axios";
 
-import DropDownMenu from "../components/DropDownMenu";
-
 import { MessageOutlined, SearchOutlined } from "@ant-design/icons";
 import json from "../data.json";
 import { PaginationProps, Popover, Select } from "antd";
@@ -15,21 +13,6 @@ import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router";
 import CustomPagination from "../components/CustomPagination";
 import CollapseBlock from "../components/CollapseBlock";
-
-const quickFilters = [
-  {
-    key: "1",
-    label: <p>Filter 1</p>,
-  },
-  {
-    key: "2",
-    label: <p>Filter 2</p>,
-  },
-  {
-    key: "3",
-    label: <p>Filter 3</p>,
-  },
-];
 
 const MainPage = () => {
   const [materials, setMaterials] = useState<Material[]>(json.results);
