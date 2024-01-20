@@ -12,6 +12,7 @@ import QuoteForm from "./DrawerPages/QuoteForm";
 import CustomButton from "../components/CustomButton";
 import { ArrowLeftOutlined, SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
+import { PageWrapper } from "./MainPage";
 
 const MaterialPage = () => {
   const [searchState, setSearchState] = useState("");
@@ -99,7 +100,7 @@ const MaterialPage = () => {
           addonBefore={<SearchOutlined />}
         />
       </Header>
-      <MaterialPageWrapper>
+      <PageWrapper style={{ alignItems: "flex-start" }}>
         <MaterialHeader>
           <CustomButton
             type="primary"
@@ -154,60 +155,67 @@ const MaterialPage = () => {
             })
           )}
         </ScrollableList>
-      </MaterialPageWrapper>
-      <FullSpecsWrapper>
-        <h2>Идентификация и функциональность</h2>
-        {data.IdentificationAndFunctionality.map(({ key, value }) => (
-          <FeatureLine key={key}>
-            <FeatureName>{key}: </FeatureName>
-            {value}
-          </FeatureLine>
-        ))}
-        {/* <Line /> */}
-        {/* <MolecularStructureBlock>
+      </PageWrapper>
+      <FullSpecsBG>
+        <FullSpecsWrapper style={{ alignItems: "flex-start" }}>
+          <h2>Идентификация и функциональность</h2>
+          {data.IdentificationAndFunctionality.map(({ key, value }) => (
+            <FeatureLine key={key}>
+              <FeatureName>{key}: </FeatureName>
+              {value}
+            </FeatureLine>
+          ))}
+          {/* <Line /> */}
+          {/* <MolecularStructureBlock>
           <FeatureName>{data.molucalarPicture.key}</FeatureName>
           <img
             src={data.molucalarPicture.value}
             alt="Molecular Structure picture"
           ></img>
         </MolecularStructureBlock> */}
-        <Line />
-        <h2>Особенности и преимущества</h2>
-        {data.FeaturesAndBenefits.map(({ key, value }) => (
-          <FeatureLine>
-            <FeatureName>{key}: </FeatureName>
-            {value}
-          </FeatureLine>
-        ))}
-        <Line />
-        <h2>Приложения и виды использования</h2>
-        {data.ApplicationsAndUses.map(({ key, value }) => (
-          <>
-            {typeof value === "string" ? (
-              <FeatureLine>
-                <FeatureName>{key}: </FeatureName>
-                {value}
-              </FeatureLine>
-            ) : (
-              <ExtendedBlock>
-                <FeatureName>{key}: </FeatureName>
+          <Line />
+          <h2>Особенности и преимущества</h2>
+          {data.FeaturesAndBenefits.map(({ key, value }) => (
+            <FeatureLine>
+              <FeatureName>{key}: </FeatureName>
+              {value}
+            </FeatureLine>
+          ))}
+          <Line />
+          <h2>Приложения и виды использования</h2>
+          {data.ApplicationsAndUses.map(({ key, value }) => (
+            <>
+              {typeof value === "string" ? (
                 <FeatureLine>
-                  {value.map(({ key, value }) => (
-                    <Wrapper key={key}>
-                      <FeatureName>{key}</FeatureName>
-                      <p>{value}</p>
-                    </Wrapper>
-                  ))}
+                  <FeatureName>{key}: </FeatureName>
+                  {value}
                 </FeatureLine>
-              </ExtendedBlock>
-            )}
-          </>
-        ))}
-        <Line />
-      </FullSpecsWrapper>
+              ) : (
+                <ExtendedBlock>
+                  <FeatureName>{key}: </FeatureName>
+                  <FeatureLine>
+                    {value.map(({ key, value }) => (
+                      <Wrapper key={key}>
+                        <FeatureName>{key}</FeatureName>
+                        <p>{value}</p>
+                      </Wrapper>
+                    ))}
+                  </FeatureLine>
+                </ExtendedBlock>
+              )}
+            </>
+          ))}
+          <Line />
+        </FullSpecsWrapper>
+      </FullSpecsBG>
     </>
   );
 };
+
+const FullSpecsBG = styled.div`
+  background-color: #fbfbfb;
+  width: 100%;
+`;
 
 const ExtendedBlock = styled.div`
   display: flex;
@@ -227,16 +235,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const MaterialPageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px 120px 10px 120px;
-`;
-
 const Line = styled.div`
   border-bottom: 1px solid #d6d6d6;
-
-  margin: 20px 0 20px 0;
+  width: 100%;
 `;
 
 // const MolecularStructureBlock = styled.div`
@@ -248,10 +249,25 @@ const Line = styled.div`
 const FullSpecsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 30px 120px 10px 120px;
+  gap: 30px;
+  align-items: center;
 
-  height: auto;
+  margin: 0 auto;
+  max-width: 1440px;
+
+  padding-top: 30px;
+
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+
+    gap: 20px;
+
+    max-width: 310px;
+
+    .dropDown {
+      width: 100%;
+    }
+  }
 
   background-color: #fbfbfb;
 `;
@@ -289,7 +305,7 @@ const FeatureName = styled.span`
 
 export const ScrollableList = styled.div`
   width: 100%;
-  margin: 30px 0;
+  margin-bottom: 30px;
   padding: 10px;
 
   display: flex;
