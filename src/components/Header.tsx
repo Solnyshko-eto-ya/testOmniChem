@@ -30,13 +30,14 @@ export const HeaderContainer = styled.div`
   margin: 0 auto;
   max-width: 1440px;
 
-  @media (min-width: 320px) {
+  @media (min-width: 320px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-
+    gap: 10px;
     align-items: center;
+
+    max-width: 310px;
+    padding: 10px 0 10px 0;
 
     box-sizing: border-box;
   }

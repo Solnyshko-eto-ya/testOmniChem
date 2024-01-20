@@ -151,7 +151,7 @@ const CardWrapper = styled.div`
 
 const StyledCard = styled.div`
   height: auto;
-  max-width: 310px;
+  max-width: 470px;
   background-color: #ffffff;
 
   cursor: pointer;

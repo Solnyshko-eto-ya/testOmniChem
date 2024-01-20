@@ -10,10 +10,11 @@ import DropDownMenu from "../components/DropDownMenu";
 
 import { MessageOutlined, SearchOutlined } from "@ant-design/icons";
 import json from "../data.json";
-import { PaginationProps, Popover } from "antd";
+import { PaginationProps, Popover, Select } from "antd";
 import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router";
 import CustomPagination from "../components/CustomPagination";
+import CollapseBlock from "../components/CollapseBlock";
 
 const quickFilters = [
   {
@@ -91,6 +92,116 @@ const MainPage = () => {
     </ChatBotWindow>
   );
 
+  const handleChange = (value: { value: string; label: React.ReactNode }) => {
+    console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+  };
+
+  const filtersItems = [
+    {
+      key: 1,
+      label: <p>Фильтры</p>,
+      children: (
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <Select
+            placeholder="Химическое семейство"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+          <Select
+            placeholder="Особенности"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+          <Select
+            placeholder="Конечное использование"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+          <Select
+            placeholder="Поставщики"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+          <Select
+            placeholder="Совместимые подложки и поверхности"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+          <Select
+            placeholder="Готовый к использованию продукт"
+            labelInValue
+            style={{ width: "100%" }}
+            onChange={handleChange}
+            options={[
+              {
+                value: "1",
+                label: "Filter 1",
+              },
+              {
+                value: "2",
+                label: "Filter 2",
+              },
+            ]}
+          />
+        </div>
+      ),
+    },
+  ];
   return (
     <>
       <FloatButtonContainer>
@@ -120,33 +231,28 @@ const MainPage = () => {
         />
       </Header>
       <PageWrapper>
+        {/* {data.suppliers.length == 0 ? (
+            <h2>В настоящее время у этого сырья нет поставщиков</h2>
+          ) : (
+            data.suppliers.map((supplier) => {
+              
+              return (
+                <SupplierCard
+                  key={data.id}
+                  items={items}
+                  sampleRequest={showSampleRequest}
+                  quoteRequest={showQuoteRequest}
+                />
+              );
+            })
+          )} */}
+
         <FiltersContainer>
-          <DropDownMenu items={quickFilters} filterText="Особенности" />
-          {/* <Cascader
-            options={options}
-            onChange={onChange}
-            placeholder="Please select"
-          /> */}
-
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Конечное использование"
-          />
-          <DropDownMenu items={quickFilters} filterText="Поставщики" />
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Химическое семейство"
-          />
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Совместимые подложки и поверхности"
-          />
-
-          <DropDownMenu
-            items={quickFilters}
-            filterText="Готовый к использованию тип продукта"
-          />
+          <CollapseBlock items={filtersItems}>
+            <CustomButton text="Фильтры" type="primary" />
+          </CollapseBlock>
         </FiltersContainer>
+
         <PaginationContainer style={{ marginBottom: "0" }}>
           <CustomPagination
             onChange={onChange}
@@ -263,6 +369,18 @@ export const PageWrapper = styled.div`
 
   margin: 0 auto;
   max-width: 1440px;
+
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+
+    gap: 20px;
+
+    max-width: 310px;
+
+    .dropDown {
+      width: 100%;
+    }
+  }
 `;
 
 const MaterialsList = styled.div`
@@ -271,7 +389,7 @@ const MaterialsList = styled.div`
   display: grid;
   /* grid-auto-rows: minmax(min-content, max-content); */
   grid-gap: 1rem;
-  margin: 0 auto;
+
   padding-bottom: 30px;
 
   @media (min-width: 620px) {
@@ -284,7 +402,7 @@ const MaterialsList = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
   @media (min-width: 1550px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
@@ -342,7 +460,7 @@ export const InputWrapper = styled.div`
 `;
 
 const FiltersContainer = styled.div`
-  height: auto;
+  width: 100%;
 
   @media (min-width: 320px) and (max-width: 768px) {
     display: flex;
@@ -351,9 +469,9 @@ const FiltersContainer = styled.div`
 
     max-width: 310px;
 
-    /* .dropDown {
+    .dropDown {
       width: 100%;
-    } */
+    }
   }
 
   @media (min-width: 768px) and (max-width: 992px) {
