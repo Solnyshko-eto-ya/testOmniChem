@@ -32,23 +32,31 @@ const quickFilters = [
 
 const MainPage = () => {
   const [materials, setMaterials] = useState<Material[]>(json.results);
+  const [total, setTotal] = useState(50);
+  const [current, setCurrent] = useState(1);
 
+  const onChange: PaginationProps["onChange"] = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
   useEffect(() => {
     // axios({
     //   method: "get",
-    //   url: "http://212.233.79.177:8000/API/v1/wiki/materials/",
+    //   url: "",
     //   responseType: "stream",
     // }).then(function (response) {
     //   setMaterials(response.data);
     // });
-    // const fetchData = async () => {
-    //   const response = await axios.get<MaterialResponse>(
-    //     // `http://212.233.79.177:8000/wiki/API/v1/materials/`
-    //     `http://212.233.79.177:8000/API/v1/wiki/materials/`
-    //   );
-    //   setMaterials(response.data.results);
-    // };
-    // fetchData();
+    const fetchData = async () => {
+      const response = await axios.get<MaterialResponse>(
+        // `http://212.233.79.177:8000/wiki/API/v1/materials/`
+        ``
+      );
+      console.log(response);
+      setMaterials(json.results);
+      setTotal(50);
+    };
+    fetchData();
   }, []);
 
   // useEffect(() => {});
@@ -82,14 +90,6 @@ const MainPage = () => {
       </ChatBotFooter>
     </ChatBotWindow>
   );
-
-  const [total, setTotal] = useState(50);
-  const [current, setCurrent] = useState(1);
-
-  const onChange: PaginationProps["onChange"] = (page) => {
-    console.log(page);
-    setCurrent(page);
-  };
 
   return (
     <>
