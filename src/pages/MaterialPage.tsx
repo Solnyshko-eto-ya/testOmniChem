@@ -13,9 +13,8 @@ import CustomButton from "../components/CustomButton";
 import { ArrowLeftOutlined, SearchOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router";
 import { PageWrapper } from "./MainPage";
-
-import { MaterialPageType } from "../type";
 import { http } from "../http";
+import { MaterialPageType } from "../type";
 
 const MaterialPage: React.FC = () => {
   const [material, setMaterial] = useState<MaterialPageType>();

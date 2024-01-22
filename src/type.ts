@@ -71,7 +71,7 @@ interface MaterialPageAttributes {
   values: MaterialPageAttributesValues[];
 }
 
-export interface MaterialPage {
+export interface MaterialPageType {
   id: number;
   value: string;
   is_supplier_available: boolean;
