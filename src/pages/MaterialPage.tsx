@@ -4,17 +4,34 @@ import styled from "styled-components";
 import SupplierCard from "../components/SupplierCard";
 import { data } from "../const/data";
 import CustomDrawer from "../components/CustomDrawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SamplesForm from "./DrawerPages/SamplesForm";
 import Button from "../components/CustomButton";
 import QuoteForm from "./DrawerPages/QuoteForm";
 import CustomButton from "../components/CustomButton";
 import { ArrowLeftOutlined, SearchOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { PageWrapper } from "./MainPage";
 
-const MaterialPage = () => {
+import { MaterialPageType } from "../type";
+import { http } from "../http";
+
+const MaterialPage: React.FC = () => {
+  const [material, setMaterial] = useState<MaterialPageType>();
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await http.get<MaterialPageType>(
+        `API/v1/wiki/materials/${id}/`
+      );
+      console.log(response.data);
+      setMaterial(response.data);
+    };
+    fetchData();
+  }, [id]);
+  console.log(material);
+
   const [searchState, setSearchState] = useState("");
   const navigate = useNavigate();
   const [openQuoteRequest, setOpenQuoteRequest] = useState(false);
@@ -108,14 +125,16 @@ const MaterialPage = () => {
             icon={<ArrowLeftOutlined />}
             onClick={() => navigate("/")}
           />
-          <h2>{data.name}</h2>
+          <h2>{material?.value}</h2>
         </MaterialHeader>
 
         <DescriptionBlock>
-          <Description>{data.descriptionHeader}</Description>
+          <Description>
+            {material?.attributes[12].values[0].translated_value}
+          </Description>
           <MaterialFeatures>
             {data.description.map(({ key, value }) => (
-              <FeatureLine key={key}>
+              <FeatureLine key={`description:${key}`}>
                 <FeatureName>{key}: </FeatureName>
                 {value}
               </FeatureLine>
@@ -146,7 +165,7 @@ const MaterialPage = () => {
               ];
               return (
                 <SupplierCard
-                  key={data.id}
+                  key={`supplierCard:${data.id}`}
                   items={items}
                   sampleRequest={showSampleRequest}
                   quoteRequest={showQuoteRequest}
@@ -160,7 +179,7 @@ const MaterialPage = () => {
         <FullSpecsWrapper style={{ alignItems: "flex-start" }}>
           <h2>Идентификация и функциональность</h2>
           {data.IdentificationAndFunctionality.map(({ key, value }) => (
-            <FeatureLine key={key}>
+            <FeatureLine key={`featureLine:${key}`}>
               <FeatureName>{key}: </FeatureName>
               {value}
             </FeatureLine>
@@ -177,7 +196,9 @@ const MaterialPage = () => {
           <h2>Особенности и преимущества</h2>
           {data.FeaturesAndBenefits.map(({ key, value }) => (
             <FeatureLine>
-              <FeatureName>{key}: </FeatureName>
+              <FeatureName key={`featuresAndBenefits:${key}`}>
+                {key}:{" "}
+              </FeatureName>
               {value}
             </FeatureLine>
           ))}
@@ -187,15 +208,19 @@ const MaterialPage = () => {
             <>
               {typeof value === "string" ? (
                 <FeatureLine>
-                  <FeatureName>{key}: </FeatureName>
+                  <FeatureName key={`ApplicationsAndUses:${key}`}>
+                    {key}:{" "}
+                  </FeatureName>
                   {value}
                 </FeatureLine>
               ) : (
                 <ExtendedBlock>
-                  <FeatureName>{key}: </FeatureName>
+                  <FeatureName key={`ApplicationsAndUses:${key}`}>
+                    {key}:{" "}
+                  </FeatureName>
                   <FeatureLine>
                     {value.map(({ key, value }) => (
-                      <Wrapper key={key}>
+                      <Wrapper key={`ApplicationsAndUses:wrapper:${key}`}>
                         <FeatureName>{key}</FeatureName>
                         <p>{value}</p>
                       </Wrapper>

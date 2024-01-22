@@ -17,8 +17,8 @@ interface MaterialCardProps {
   description: string;
   materialName: string;
   isHaveSupplier: boolean;
-  link: string;
-  onCardClick: () => void;
+  onCardClick: (id: number) => void;
+  id: number;
 }
 
 const MaterialCard: React.FC<MaterialCardProps> = ({
@@ -32,8 +32,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
   chemicalFamily,
   description,
   isHaveSupplier,
-  link,
-
+  id,
   onCardClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,9 +47,13 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
       setIsOpen(!isOpen);
     }
   }
+  const onClick = () => {
+    onCardClick(id);
+  };
+
   return (
     <CardWrapper>
-      <StyledCard onClick={onCardClick}>
+      <StyledCard onClick={onClick}>
         <CardHeader>
           <ManufacturerImage>{manufacturerImage}</ManufacturerImage>
           <ManufacturerIcon>{manufacturerIcon}</ManufacturerIcon>
@@ -83,7 +86,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
       </StyledCard>
       <CardFooter>
         <LinkContainer>
-          <Link href={link}>Посмотреть сырье </Link>
+          <Link>Посмотреть сырье </Link>
           {isHaveSupplier ? (
             <FireIcon>
               <Popover content="У этого сырья есть поставщик!">
