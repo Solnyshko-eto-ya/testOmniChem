@@ -56,12 +56,12 @@ export interface MaterialResponse {
   results: Material[];
 }
 
-interface MaterialPageAttributesValues {
+export interface MaterialPageAttributesValues {
   translated_value: string;
   value: string;
 }
 
-interface MaterialPageAttributes {
+export interface MaterialPageAttributes {
   attribute_name: string;
   translated_attribute_name: string;
   units: unknown;
